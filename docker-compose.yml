@@ -32,17 +32,12 @@ services:
     container_name: db
     command: --default-authentication-plugin=mysql_native_password
     restart: always
+    ports:
+      - "${PUBLIC_DB_PORT}"
     environment:
       MYSQL_ROOT_PASSWORD: "${PASSWORD}"
     volumes:
       - ./db:/var/lib/mysql
-
-  adminer:
-    image: adminer
-    container_name: adminer
-    restart: always
-    ports:
-      - "${PUBLIC_ADMINER_PORT}"
 
 networks:
   shared:
