@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  web:
+    image: nginx:latest
+    restart: always
+    container_name: web
+    ports:
+      - "${PUBLIC_WEB_PORT}"
+    volumes:
+      - ./app:/app
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    networks:
+      - "${SHARED}"
+  php:
+    build: ./app
+    container_name: php
+    environment:
+      - XDEBUG_CONFIG
+      - PHP_XDEBUG_ENABLED
+      - PHP_IDE_CONFIG
+    volumes:
+      - ./app:/app
+      - ./xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+    networks:
+      - "${SHARED}"
+networks:
+  shared:
+    driver: bridge
