@@ -38,6 +38,8 @@ services:
       MYSQL_ROOT_PASSWORD: "${PASSWORD}"
     volumes:
       - ./db:/var/lib/mysql
+    networks:
+      - "${SHARED}"
 
 networks:
   shared:
