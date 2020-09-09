@@ -1,0 +1,4 @@
+/db/#innodb_temp/
+*.ibt
+/db/
+!/db/orders/
